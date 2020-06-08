@@ -1,8 +1,8 @@
-extended-unity-texture-packer [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](http://mit-license.org) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/andyduboc/5usd)
+extended-unity-texture-packer [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
 ==========
 
 
-:hammer: Utility to merge different texture channels into a final texture output. 
+Unity utility to merge different texture channels into a final texture output. 
 
 ![screenshot](Screenshots/screen00.gif)
 
