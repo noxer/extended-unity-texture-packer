@@ -20,7 +20,7 @@ in the "dependencies" section add:
 {
   "dependencies": {
       ...
-      "dev.plusmid.extended-unity-texture-packer":"https://github.com/noxer/unity-texture-packer.git#0.2.0"
+      "dev.plusmid.extended-unity-texture-packer":"https://github.com/noxer/extended-unity-texture-packer.git#0.2.0"
       ...
   }
 }
