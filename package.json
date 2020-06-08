@@ -1,10 +1,13 @@
 {
-  "author": "Andy Duboc",
-  "description": "Tool used to merge arbitary texture channels in one texture ouput.",
-  "displayName": "Texture Channel Packer",
-  "license": "MIT",
-  "name": "ca.andydbc.unity-texture-packer",
-  "unity": "2019.2",
-  "unityRelease": "0f1",
-  "version": "0.1.0"
+	"author": {
+		"name": "Tim Scheuermann",
+		"url": "https://blog.plusmid.dev"
+	},
+	"description": "Tool used to merge arbitary texture channels into one texture. Includes presets for HDRP Mask Textures and supports inverted channels.\n\nYou can open the conversion windows under 'Window > Channel Packer'\n\nBased on the Texture Channel Packer by Andy Duboc.",
+	"displayName": "Extended Texture Channel Packer",
+	"license": "MIT",
+	"name": "dev.plusmid.extended-unity-texture-packer",
+	"unity": "2019.2",
+	"unityRelease": "0f1",
+	"version": "0.2.0"
 }

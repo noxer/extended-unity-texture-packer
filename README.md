@@ -1,4 +1,4 @@
-unity-texture-packer [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](http://mit-license.org) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/andyduboc/5usd)
+extended-unity-texture-packer [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](http://mit-license.org) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/andyduboc/5usd)
 ==========
 
 
@@ -20,7 +20,7 @@ in the "dependencies" section add:
 {
   "dependencies": {
       ...
-      "ca.andydbc.unity-texture-packer":"https://github.com/andydbc/unity-texture-packer.git#0.1.0"
+      "dev.plusmid.extended-unity-texture-packer":"https://github.com/noxer/unity-texture-packer.git#0.2.0"
       ...
   }
 }

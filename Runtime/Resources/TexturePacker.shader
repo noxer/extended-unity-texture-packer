@@ -10,7 +10,9 @@
 		_Input00In ("Input00 In", Vector) = (0,0,0,0)
 		_Input01In ("Input01 In", Vector) = (0,0,0,0)
 		_Input02In ("Input02 In", Vector) = (0,0,0,0)
-		_Input02In ("Input02 In", Vector) = (0,0,0,0)
+		_Input03In ("Input03 In", Vector) = (0,0,0,0)
+
+		_InputInv ("Input Inverted", Vector) = (0,0,0,0)
 	}
 	SubShader
 	{
@@ -48,6 +50,8 @@
 			float4 _Input02In;
 			float4 _Input03In;
 			
+			float4 _InputInv;
+
 			float4x4 _Input00Out;
 			float4x4 _Input01Out;
 			float4x4 _Input02Out;
@@ -61,24 +65,24 @@
 				return o;
 			}
 
-			float4 SwapChannels(sampler2D tex, float2 uv, float4 e, float4x4 v)
+			float4 SwapChannels(sampler2D tex, float2 uv, float4 e, float4x4 v, float1 inv)
 			{
 				float4 inColor = tex2D(tex, uv);
 				
-				float4 r = inColor.rrrr * v[0] * e.r;
-				float4 g = inColor.gggg * v[1] * e.g;
-				float4 b = inColor.bbbb * v[2] * e.b;
-				float4 a = inColor.aaaa * v[3] * e.a;
+				float4 r = abs(inColor.rrrr - inv) * v[0] * e.r;
+				float4 g = abs(inColor.gggg - inv) * v[1] * e.g;
+				float4 b = abs(inColor.bbbb - inv) * v[2] * e.b;
+				float4 a = abs(inColor.aaaa - inv) * v[3] * e.a;
 
 				return r + g + b + a;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float4 c00 = SwapChannels(_Input00Tex, i.uv, _Input00In, _Input00Out);
-				float4 c01 = SwapChannels(_Input01Tex, i.uv, _Input01In, _Input01Out);
-				float4 c02 = SwapChannels(_Input02Tex, i.uv, _Input02In, _Input02Out);
-				float4 c03 = SwapChannels(_Input03Tex, i.uv, _Input03In, _Input03Out);
+				float4 c00 = SwapChannels(_Input00Tex, i.uv, _Input00In, _Input00Out, _InputInv[0]);
+				float4 c01 = SwapChannels(_Input01Tex, i.uv, _Input01In, _Input01Out, _InputInv[1]);
+				float4 c02 = SwapChannels(_Input02Tex, i.uv, _Input02In, _Input02Out, _InputInv[2]);
+				float4 c03 = SwapChannels(_Input03Tex, i.uv, _Input03In, _Input03Out, _InputInv[3]);
 				return c00 + c01 + c02 + c03;
 			}
 			ENDCG

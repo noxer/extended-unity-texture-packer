@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Reflection.Emit;
+using UnityEditor;
 using UnityEngine;
 
 namespace TexPacker
@@ -29,7 +30,8 @@ namespace TexPacker
 
             EditorGUILayout.BeginHorizontal();
 
-            _fold = EditorGUI.Foldout(GetFoldRect(), _fold, "Input");
+            string label = string.IsNullOrEmpty(input.label) ? "Input" : input.label;
+            _fold = EditorGUI.Foldout(GetFoldRect(), _fold, label);
 
             var gearStyle = new GUIStyle();
             GUILayout.FlexibleSpace();
@@ -51,7 +53,6 @@ namespace TexPacker
                 EditorGUILayout.EndHorizontal();
                 if (_fold)
                 {
-
                     GUILayout.BeginHorizontal(TexturePackerStyles.Heading);
 
                     GUILayout.BeginVertical(TexturePackerStyles.Heading);
@@ -81,7 +82,14 @@ namespace TexPacker
 
                     GUILayout.EndVertical();
 
+
+                    GUILayout.BeginVertical(TexturePackerStyles.Heading);
+                    
                     input.texture = EditorGUILayout.ObjectField(input.texture, typeof(Texture2D), false, GUILayout.Width(90), GUILayout.Height(80)) as Texture2D;
+                    
+                    input.inverted = GUILayout.Toggle(input.inverted, "inverted");
+                    
+                    GUILayout.EndVertical();
 
                     GUILayout.EndHorizontal();
 

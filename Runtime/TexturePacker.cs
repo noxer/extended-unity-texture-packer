@@ -36,15 +36,16 @@ namespace TexPacker
 
         private string GetPropertyName(int i, string param)
         {
-            return string.Format("_Input0{0}{1}", i, param);
+            return $"_Input0{i}{param}";
         }
 
         public void ClearProperties()
         {
-            for (int i = 0; i < 6; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 _material.SetTexture(GetPropertyName(i, "Tex"), Texture2D.blackTexture);
                 _material.SetVector(GetPropertyName(i, "In"), Vector4.zero);
+                _material.SetVector("_InputInv", Vector4.zero);
             }
         }
 
@@ -52,7 +53,7 @@ namespace TexPacker
         {
             Vector4 states = Vector4.zero;
 
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 var state = texInput.GetChannelInput((TextureChannel)i).enabled;
                 states[i] = state ? 1f : 0f;
@@ -65,7 +66,7 @@ namespace TexPacker
         {
             Matrix4x4 m = Matrix4x4.zero;
 
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 Vector4 inChannel = Vector4.zero;
                 var output = texInput.GetChannelInput((TextureChannel)i).output;
@@ -78,20 +79,27 @@ namespace TexPacker
 
         public Texture2D Create()
         {
+            Vector4 inverted = Vector4.zero;
+
             int idx = 0;
             foreach(var input in _texInputs)
             {
-                var Tex = input.texture;
+                Texture2D Tex = input.texture;
                 _material.SetTexture(GetPropertyName(idx, "Tex"), Tex);
 
-                var In = GetInputs(input);
+                Vector4 In = GetInputs(input);
                 _material.SetVector(GetPropertyName(idx, "In"), In);
 
-                var Out = GetOutputs(input);
+                Matrix4x4 Out = GetOutputs(input);
                 _material.SetMatrix(GetPropertyName(idx, "Out"), Out);
+
+                if (input.inverted)
+                    inverted[idx] = 1f;
+
                 ++idx;
             }
 
+            _material.SetVector("_InputInv", inverted);
             var texture = TextureUtility.GenerateTexture(resolution, resolution, _material);
 
             return texture;

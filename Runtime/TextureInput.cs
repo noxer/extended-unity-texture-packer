@@ -6,16 +6,20 @@ namespace TexPacker
 {
     public class TextureInput
     {
+        public string label;
+
         public Texture2D texture;
 
         private Dictionary<TextureChannel, TextureChannelInput> _inputs = new Dictionary<TextureChannel, TextureChannelInput>();
 
+        public bool inverted;
+
         public TextureInput()
         {
-            _inputs[TextureChannel.ChannelRed]      = new TextureChannelInput();
-            _inputs[TextureChannel.ChannelGreen]    = new TextureChannelInput();
-            _inputs[TextureChannel.ChannelBlue]     = new TextureChannelInput();
-            _inputs[TextureChannel.ChannelAlpha]    = new TextureChannelInput();
+            _inputs[TextureChannel.ChannelRed]      = new TextureChannelInput(TextureChannel.ChannelRed);
+            _inputs[TextureChannel.ChannelGreen]    = new TextureChannelInput(TextureChannel.ChannelGreen);
+            _inputs[TextureChannel.ChannelBlue]     = new TextureChannelInput(TextureChannel.ChannelBlue);
+            _inputs[TextureChannel.ChannelAlpha]    = new TextureChannelInput(TextureChannel.ChannelAlpha);
         }
 
         public TextureChannelInput GetChannelInput(TextureChannel channel)
