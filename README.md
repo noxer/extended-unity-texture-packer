@@ -39,6 +39,7 @@ The tool is located under "Window" and is called "Channel Packer"
 ## Note
 
 This is still under development and may be buggy.
+The tool is based on https://github.com/andydbc/unity-texture-packer by Andy Duboc.
 
 ## License
 
